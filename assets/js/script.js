@@ -3,7 +3,7 @@
  console.log(choices);
 
  var currentQuestion = {};
- var acceptingAnswers = true;
+ var acceptingAnswers = false;
  var score = 0;
  var questionCounter = 0;
  var availableQuestions = [];
@@ -63,13 +63,31 @@
  };
 
  getNewQuestion = function() {
+    //  if(availableQuestions.length === 0 || questionCounter < maxQuestions) {
+    //      return window.location.assign(`/end.html`);
+    //  }
     questionCounter++;
     const questionIndex = Math.floor(Math.random() * availableQuestions.length);
     currentQuestion = availableQuestions[questionIndex];
     question.innerText = currentQuestion.question;
 
-   
-   
-    };
+    choices.forEach(choice => {
+        var number = choice.dataset[`number`];
+        choice.innerText = currentQuestion[`choice` + number];
+    });
+   availableQuestions.splice(questionIndex, 1);
+   acceptingAnswers = true; 
+};
+
+choices.forEach(choice => {
+    choice.addEventListener("click", e => {
+    if(!acceptingAnswers) return;
+
+    acceptingAnswers = false;
+    var selectedChoice = e.target;
+    var selectedAnswer = selectedChoice.dataset[`number`];
+    getNewQuestion();
+    }); 
+});
 
  startgame();
