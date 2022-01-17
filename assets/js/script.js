@@ -85,11 +85,13 @@ choices.forEach(choice => {
     acceptingAnswers = false;
     var selectedChoice = e.target;
     var selectedAnswer = selectedChoice.dataset[`number`];
-    var classToApply = "incorrect";
+    var classToApply = "wrong";
     if (selectedAnswer == currentQuestion.answer) {
         classToApply = "correct";
     }
-
+    if (classToApply == "correct") {
+        incrementScore(correctBonus);
+    }
     selectedChoice.parentElement.classList.add(classToApply);
     setTimeout(() => {
         selectedChoice.parentElement.classList.remove(classToApply);
@@ -98,5 +100,10 @@ choices.forEach(choice => {
 
     }); 
 });
+
+incrementScore = function (num) {
+    score +- num;
+    scoreText.InnerText = score;
+}
 
  startgame();
