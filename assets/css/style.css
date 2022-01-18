@@ -39,7 +39,7 @@ h3 {
 
 .container {
     width: 100vw;
-    height: 100vh;
+    height: 25vh;
     display: flex;
     justify-content: center;
     align-items: center;
