@@ -63,7 +63,7 @@
  getNewQuestion = function() {
      if(availableQuestions.length === 0 || questionCounter >= maxQuestions) {
         localStorage.setItem("mostRecentScore", score);
-        return window.location.assign(`highscore.html`);
+        return window.location.assign(`score.html`);
      }
    
     questionCounter++;
