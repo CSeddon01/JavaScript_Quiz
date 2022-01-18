@@ -1,6 +1,5 @@
  const question = document.getElementById("question");
  const choices = Array.from(document.getElementsByClassName("choice-text"));
- console.log(choices);
 
  var currentQuestion = {};
  var acceptingAnswers = false;
@@ -31,7 +30,7 @@
         choice2: "curly brackets",
         choice3: "parenthesis",
         choice4: "square brackets",
-        answer: 3     
+        answer: 2     
         },
         {
         question: "Commonly used data types DO NOT include:",
@@ -52,7 +51,7 @@
  ]
 
  var correctBonus = 10;
- var maxQuestions = 3;
+ var maxQuestions = 5;
 
  startgame = function () { 
      questionCounter = 0;
@@ -62,37 +61,46 @@
  };
 
  getNewQuestion = function() {
-    //  if(availableQuestions.length === 0 || questionCounter < maxQuestions) {
-    //      return window.location.assign(`/end.html`);
-    //  }
+     if(availableQuestions.length === 0 || questionCounter >= maxQuestions) {
+        localStorage.setItem("mostRecentScore", score);
+        return window.location.assign(`highscore.html`);
+     }
+   
     questionCounter++;
     const questionIndex = Math.floor(Math.random() * availableQuestions.length);
     currentQuestion = availableQuestions[questionIndex];
     question.innerText = currentQuestion.question;
 
-    choices.forEach(choice => {
+    choices.forEach((choice) => {
         var number = choice.dataset[`number`];
         choice.innerText = currentQuestion[`choice` + number];
     });
+
    availableQuestions.splice(questionIndex, 1);
    acceptingAnswers = true; 
 };
 
-choices.forEach(choice => {
-    choice.addEventListener("click", e => {
+choices.forEach((choice) => {
+    choice.addEventListener("click", (e) => {
     if(!acceptingAnswers) return;
 
     acceptingAnswers = false;
     var selectedChoice = e.target;
     var selectedAnswer = selectedChoice.dataset[`number`];
-    var classToApply = "wrong";
-    if (selectedAnswer == currentQuestion.answer) {
-        classToApply = "correct";
-    }
-    if (classToApply == "correct") {
-        incrementScore(correctBonus);
-    }
+
+    const classToApply =
+    selectedAnswer == currentQuestion.answer ? "correct" : "wrong"; 
+
+    // var classToApply = "wrong";
+    // if (selectedAnswer == currentQuestion.answer) {
+    //     classToApply = "correct";
+    // }
+    // if (classToApply === "correct") {
+    //     incrementScore(correctBonus);
+    // }
+
     selectedChoice.parentElement.classList.add(classToApply);
+    
     setTimeout(() => {
         selectedChoice.parentElement.classList.remove(classToApply);
         getNewQuestion();
@@ -101,9 +109,20 @@ choices.forEach(choice => {
     }); 
 });
 
-incrementScore = function (num) {
-    score +- num;
-    scoreText.InnerText = score;
-}
+incrementScore = (num) => {
+    score += num;
+    scoreText.innerText = score;
+};
+
+var timeLeft = 75;
+var downLoadTimer = setInterval(function() {
+    if (timeLeft <= 0) {
+        clearInterval(downLoadTimer);
+        document.getElementById("countdown").innerHTML = "Out of time";
+    } else {
+        document.getElementById('countdown').innerHTML = timeLeft + " seconds left";
+    }
+    timeLeft -= 1; 
+},1000);
 
  startgame();
