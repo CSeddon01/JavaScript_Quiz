@@ -46,7 +46,7 @@
         choice2: "terminal/bash",
         choice3: "for loops",
         choice4: "console.log",
-        answer: 1    
+        answer: 4    
         },
  ]
 

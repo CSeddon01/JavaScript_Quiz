@@ -35,7 +35,7 @@ h3 {
     font-weight: 500;
 }
 
-/* utilities */
+/* Container Styling */
 
 .container {
     width: 100vw;
@@ -50,6 +50,29 @@ h3 {
 .container > * {
     width: 100%;
 }
+
+.choice-container {
+    display: flex;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    font-size: 1.8rem;
+    border: 0.1rem solid white;
+    background-color: rgb(50, 18, 136); 
+    color: #fff; 
+  }
+
+  .choice-prefix {
+    padding: 1.5rem 2.5rem;
+    background-color: rgb(50, 18, 136);
+    color: #fff;
+}
+
+.choice-text {
+    padding: 1.5rem;
+    width: 100%;
+} 
+
+/* Container styling End */
 
 .flex-column {
     display: flex;
