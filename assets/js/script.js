@@ -56,14 +56,16 @@
 
 //  Start Quiz
  startgame = function () { 
+    document.getElementById("secondPage").style.display = "none";
      questionCounter = 0;
      score = 0;
      availableQuestions = [...questions];
-     getNewQuestion();
+     
  };
 
 // New Questions, shuffled
  getNewQuestion = function() {
+    document.getElementById("secondPage").style.display = "inline";
     questionCounter++;
     const questionIndex = Math.floor(Math.random() * availableQuestions.length);
     currentQuestion = availableQuestions[questionIndex];
@@ -146,6 +148,7 @@ choices.forEach((choice) => {
 function hideDiv() {
     document.getElementById("firstPage").style.display = "none";
     console.log("display hidden");
+    getNewQuestion();
 }
 
 // Saving Highscores
