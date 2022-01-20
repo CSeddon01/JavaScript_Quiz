@@ -7,6 +7,7 @@
  var questionCounter = 0;
  var availableQuestions = [];
  
+//  Array of questions
  var questions = [
         {
          question: "String values must be enclosed within ____ when being assigned to variables.",
@@ -53,6 +54,7 @@
  var correctBonus = 10;
  var maxQuestions = 5;
 
+//  Start Quiz
  startgame = function () { 
      questionCounter = 0;
      score = 0;
@@ -60,9 +62,9 @@
      getNewQuestion();
  };
 
+// New Questions
  getNewQuestion = function() {
-     
-    questionCounter++;
+      questionCounter++;
     const questionIndex = Math.floor(Math.random() * availableQuestions.length);
     currentQuestion = availableQuestions[questionIndex];
     question.innerText = currentQuestion.question;
@@ -78,10 +80,11 @@
    if(availableQuestions.length === 0 || questionCounter >= maxQuestions) {
     localStorage.setItem("mostRecentScore", score);
     return window.location.assign(`score.html`);
-    document.getElementById("score").innerHTML = score;
+    
  }
 };
 
+// evalute score
 choices.forEach((choice) => {
     choice.addEventListener("click", (e) => {
     if(!acceptingAnswers) return;
@@ -89,11 +92,9 @@ choices.forEach((choice) => {
     acceptingAnswers = false;
     var selectedChoice = e.target;
     var selectedAnswer = selectedChoice.dataset[`number`];
-
-    // evalute score 
-    score = (selectedAnswer == currentQuestion.answer) ? score + 1 : score;
+    score = (selectedAnswer == currentQuestion.answer) ? score + 5 : score;
     // console.log("stuff" + score);
-    // document.getElementById("score").innerHTML = score;
+    document.getElementById("score").innerHTML = score;
 
     const classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "wrong";
     selectedChoice.parentElement.classList.add(classToApply);
@@ -108,6 +109,14 @@ choices.forEach((choice) => {
 
 console.log(score);
 
+// Saving Highscores
+saveHighScore = function (e) {
+    console.log("clicks");
+    e.preventDefault();
+    return window.location.assign(`highscore.html`);
+}
+
+// Timer 
 var timeLeft = 75;
 var downLoadTimer = setInterval(function() {
     if (timeLeft <= 0) {
