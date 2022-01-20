@@ -1,12 +1,12 @@
  const question = document.getElementById("question");
  const choices = Array.from(document.getElementsByClassName("choice-text"));
-
+ const scoreText = document.getElementById("score");
  var currentQuestion = {};
  var acceptingAnswers = false;
  var score = 0;
  var questionCounter = 0;
  var availableQuestions = [];
-
+ 
  var questions = [
         {
          question: "String values must be enclosed within ____ when being assigned to variables.",
@@ -61,11 +61,7 @@
  };
 
  getNewQuestion = function() {
-     if(availableQuestions.length === 0 || questionCounter >= maxQuestions) {
-        localStorage.setItem("mostRecentScore", score);
-        return window.location.assign(`score.html`);
-     }
-   
+     
     questionCounter++;
     const questionIndex = Math.floor(Math.random() * availableQuestions.length);
     currentQuestion = availableQuestions[questionIndex];
@@ -78,6 +74,12 @@
 
    availableQuestions.splice(questionIndex, 1);
    acceptingAnswers = true; 
+
+   if(availableQuestions.length === 0 || questionCounter >= maxQuestions) {
+    localStorage.setItem("mostRecentScore", score);
+    return window.location.assign(`score.html`);
+    document.getElementById("score").innerHTML = score;
+ }
 };
 
 choices.forEach((choice) => {
@@ -88,17 +90,12 @@ choices.forEach((choice) => {
     var selectedChoice = e.target;
     var selectedAnswer = selectedChoice.dataset[`number`];
 
-    const classToApply =
-    selectedAnswer == currentQuestion.answer ? "correct" : "wrong"; 
+    // evalute score 
+    score = (selectedAnswer == currentQuestion.answer) ? score + 1 : score;
+    // console.log("stuff" + score);
+    // document.getElementById("score").innerHTML = score;
 
-    // var classToApply = "wrong";
-    // if (selectedAnswer == currentQuestion.answer) {
-    //     classToApply = "correct";
-    // }
-    // if (classToApply === "correct") {
-    //     incrementScore(correctBonus);
-    // }
-
+    const classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "wrong";
     selectedChoice.parentElement.classList.add(classToApply);
     
     setTimeout(() => {
@@ -109,16 +106,14 @@ choices.forEach((choice) => {
     }); 
 });
 
-incrementScore = (num) => {
-    score += num;
-    scoreText.innerText = score;
-};
+console.log(score);
 
 var timeLeft = 75;
 var downLoadTimer = setInterval(function() {
     if (timeLeft <= 0) {
         clearInterval(downLoadTimer);
         document.getElementById("countdown").innerHTML = "Out of time";
+        return window.location.assign(`score.html`);
     } else {
         document.getElementById('countdown').innerHTML = timeLeft + " seconds left";
     }
