@@ -62,7 +62,7 @@
      getNewQuestion();
  };
 
-// New Questions
+// New Questions, shuffled
  getNewQuestion = function() {
     questionCounter++;
     const questionIndex = Math.floor(Math.random() * availableQuestions.length);
@@ -82,6 +82,40 @@
     window.location.hash = "finalScore";
     
  }
+};
+
+// This displays "correct"
+function displayCorrect() {
+    var correct = createElement("h3", "id", "correct", "Correct!");
+    appendChild(document.body, correct);
+    timer = 1;
+    var timerInterval = setInterval(function () {
+        timer--;
+        if (timer === 0) {
+            clearInterval(timerInterval);
+            var element = document.getElementById("correct");
+            element.parentNode.removeChild(element);
+            timer = 1;
+    console.log("correct");
+        };
+    }, 1000);
+};
+
+// This displays "wrong"
+function displayWrong() {
+    var wrong = createElement("h3", "id", "wrong", "Wrong!")
+    appendChild(document.body, wrong);
+    timer = 1;
+    var timerInterval = setInterval(function () {
+        timer--;
+        if (timer === 0) {
+            clearInterval(timerInterval);
+            var element = document.getElementById("wrong");
+            element.parentNode.removeChild(element);
+            timer = 1;
+    console.log("Wrong!");
+        };
+    }, 1000);
 };
 
 // evalute score
@@ -107,13 +141,19 @@ choices.forEach((choice) => {
     }); 
 });
 
+//hide divs
+
+function hideDiv() {
+    document.getElementById("firstPage").style.display = "none";
+    console.log("display hidden");
+}
 
 // Saving Highscores
 // saveHighScore = function (e) {
     
 // }
 
-// Timer 
+// Timer, when it hits zero the game is over
 var timeLeft = 75;
 var downLoadTimer = setInterval(function() {
     if (timeLeft <= 0) {

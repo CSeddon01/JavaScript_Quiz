@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+
+    <!-- Intro Page -->
+<div id="firstPage">
     <div class="container1">
         <div id="game" class="justify-center flex-column">
             <div>
@@ -20,19 +23,25 @@
     <div id="home" class="flex-center flex-column">
         <h1>Coding Quiz Challenge</h1>
         <h3>Try to answer the following questions within the time limit.</h3>
-        <a class ="btn" href="#game">Quiz Challenge</a>
+        
+        <button onclick="hideDiv()" class ="btn" href="#game">Quiz Challenge</button>
+
     </div>
    </div>
-   <div class="container3">
+</div>
+
+<!-- Quiz Page -->
+<div id="secondPage"> 
+  <div class="container3">
     <div class="justify-center flex-column">
         <div id="notification">
-        <a href="#endQuiz">High scores</a>
-        <h3 id="score"></h3>
-        <p id="countdown">Timer</p>
+            <a href="#endQuiz">High scores</a>
+            <h3 id="score"></h3>
+            <p id="countdown">Timer</p>
         </div>
     </div>
-</div>
-<div class="container4">
+  </div>
+  <div class="container4">
     <div id="game" class="justify-center flex-column">
         <h2 id="question">What is the answer to this question?</h2>
         <div class="choice-container">
@@ -51,35 +60,51 @@
             <p class="choice-prefix">4.</p>
             <p class="choice-text" data-number="4"></p>
         </div>
+        
+    <!-- <button onclick="divVisibility('Div2');" class="btn">Finish Game</button> -->
     </div>
+  </div>
 </div>
-<div class="container5">
+
+<!-- Final Score Page -->
+<div id="thirdPage">
+  <div class="container5">
     <div id="game" class="justify-center flex-column">
         <div id="notification">
             <p class="HighScorePage"><a name="highscore">High Scores</a></p> 
             <p class="Timer"></p>
         </div>
     </div>
-</div>
-<div class="container6">
+  </div>
+  <div class="container6">
     <div id="finalScore" class="flex-center flex-column">
         <h2>All done!</h2>
         <h3>Your final score is:</h3>
         <h3 id="finalScore"></h3>
         <form>
             <input type="text" name="initials" id="initials" placeholder="Enter initials"/>
-            <button type="submit" class="btn" id="saveScoreBtn" onClick="saveHighScore(event)" >Submit</button>
+            
+            <!-- <button onclick="divVisibility('Div3');" type="submit" class="btn" id="saveScoreBtn" onClick="saveHighScore(event)" >Submit</button> -->
         </form>
+    </div>
+  </div>
 </div>
-    <div class="container7">
+
+<!-- Highscore Page -->
+<div id="forthPage">
+  <div class="container7">
     <div class="justify-center flex-column">
             <h2 id="endQuiz">High scores</h2> 
         <form>
             <h2 id="initials">Initials</h2>
             <p id="saveHighScore">High Score</p>
         </form>
+        <!-- <button onclick="divVisibility('Div4');"></button> -->
+   
     </div>
-</div>  
+  </div>  
+</div>
+
 <script type="text/javascript" src="assets/js/script.js"></script>   
 </body>
 </html>
