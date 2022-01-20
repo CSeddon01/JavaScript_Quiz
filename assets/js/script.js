@@ -64,7 +64,7 @@
 
 // New Questions
  getNewQuestion = function() {
-      questionCounter++;
+    questionCounter++;
     const questionIndex = Math.floor(Math.random() * availableQuestions.length);
     currentQuestion = availableQuestions[questionIndex];
     question.innerText = currentQuestion.question;
@@ -79,7 +79,7 @@
 
    if(availableQuestions.length === 0 || questionCounter >= maxQuestions) {
     localStorage.setItem("mostRecentScore", score);
-    return window.location.assign(`score.html`);
+    window.location.hash = "finalScore";
     
  }
 };
@@ -93,8 +93,8 @@ choices.forEach((choice) => {
     var selectedChoice = e.target;
     var selectedAnswer = selectedChoice.dataset[`number`];
     score = (selectedAnswer == currentQuestion.answer) ? score + 5 : score;
-    // console.log("stuff" + score);
-    document.getElementById("score").innerHTML = score;
+    console.log("stuff" + score);
+    // scoreText.innerHTML = score;
 
     const classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "wrong";
     selectedChoice.parentElement.classList.add(classToApply);
@@ -107,14 +107,11 @@ choices.forEach((choice) => {
     }); 
 });
 
-console.log(score);
 
 // Saving Highscores
-saveHighScore = function (e) {
-    console.log("clicks");
-    e.preventDefault();
-    return window.location.assign(`highscore.html`);
-}
+// saveHighScore = function (e) {
+    
+// }
 
 // Timer 
 var timeLeft = 75;
@@ -122,7 +119,7 @@ var downLoadTimer = setInterval(function() {
     if (timeLeft <= 0) {
         clearInterval(downLoadTimer);
         document.getElementById("countdown").innerHTML = "Out of time";
-        return window.location.assign(`score.html`);
+        window.location.hash = "finalScore";
     } else {
         document.getElementById('countdown').innerHTML = timeLeft + " seconds left";
     }

@@ -37,7 +37,7 @@ h3 {
 
 /* Container Styling */
 
-.container1, .container2, .container3 {
+.container, .container1, .container2, .container3, .container4, .container5, .container6, .container7 {
     width: 100vw;
     height: 25vh;
     display: flex;
