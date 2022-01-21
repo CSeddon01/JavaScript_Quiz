@@ -1,6 +1,6 @@
  const question = document.getElementById("question");
  const choices = Array.from(document.getElementsByClassName("choice-text"));
- const scoreText = document.getElementById("score");
+ const scoreText = document.getElementById("finalScore");
  var currentQuestion = {};
  var acceptingAnswers = false;
  var score = 0;
@@ -15,7 +15,7 @@
          choice2: "curly brackets",
          choice3: "quotes",
          choice4: "parenthesis",
-         answer: 1   
+         answer: 3  
         },
         {
         question: "Arrays in JavaScript can be used to store ____.",
@@ -132,7 +132,7 @@ choices.forEach((choice) => {
     score = (selectedAnswer == currentQuestion.answer) ? score + 5 : score;
     console.log("stuff" + score);
     document.getElementById("finalScore").innerHTML = score;
-    // scoreText.innerHTML = score;
+    scoreText.innerHTML = score;
 
     const classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "wrong";
     selectedChoice.parentElement.classList.add(classToApply);
@@ -167,7 +167,7 @@ var downLoadTimer = setInterval(function() {
     if (timeLeft <= 0) {
         clearInterval(downLoadTimer);
         document.getElementById("countdown").innerHTML = "Out of time";
-        window.location.hash = "theFinalScore";
+        window.location.hash = "finalScore";
     } else {
         document.getElementById('countdown').innerHTML = timeLeft + " seconds left";
     }
