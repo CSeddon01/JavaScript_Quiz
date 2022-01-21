@@ -9,11 +9,11 @@
 </head>
 <body>
 
-    <!-- Intro Page -->
+    <!-- First Page - Intro Page -->
 <div id="firstPage">
     <div class="container1">
         <div id="game" class="justify-center flex-column">
-            <div>
+            <div id="notification">
             <p class="HighScorePage"><a href="#endQuiz">High scores</a></p> 
             <p class="Timer"></p>
             </div>
@@ -27,10 +27,10 @@
         <button onclick="hideDiv()" class ="btn" href="#game">Quiz Challenge</button>
 
     </div>
-   </div>
+   </div>   
 </div>
 
-<!-- Quiz Page -->
+<!-- Second Page - Quiz Page -->
 <div id="secondPage"> 
   <div class="container3">
     <div class="justify-center flex-column">
@@ -60,13 +60,13 @@
             <p class="choice-prefix">4.</p>
             <p class="choice-text" data-number="4"></p>
         </div>
-        
-    <!-- <button onclick="divVisibility('Div2');" class="btn">Finish Game</button> -->
+      <br>  
+    <button onclick="hideDiv2()" class="btn" href="#finalScore">Finish Quiz</button>
     </div>
   </div>
 </div>
 
-<!-- Final Score Page -->
+<!-- Third Page - Final Score Page -->
 <div id="thirdPage">
   <div class="container5">
     <div id="game" class="justify-center flex-column">
@@ -90,15 +90,19 @@
   </div>
 </div>
 
-<!-- Highscore Page -->
+<!-- Forth Page - Highscore Page -->
 <div id="forthPage">
   <div class="container7">
     <div class="justify-center flex-column">
             <h2 id="endQuiz">High scores</h2> 
-        <form>
-            <h2 id="initials">Initials</h2>
-            <p id="saveHighScore">High Score</p>
-        </form>
+        <table>
+            <tr>
+                <th>Initials</th>
+                <th>Your Score</th>
+                <th>High Score</th>
+            </tr>
+
+        </table>
         <!-- <button onclick="divVisibility('Div4');"></button> -->
    
     </div>

@@ -13,7 +13,7 @@ h1, h3, h4 {
     margin-bottom: 1rem;
 }
 
-h1 {
+h1, #wrong {
     font-size: 5.4rem;
     color: black;
     margin-bottom: 5rem;
@@ -92,7 +92,7 @@ h3 {
     text-align: center;
 }
 
-/* Styles for links at top of page */
+/* Styles for links (timer and highscores link) at top of page  */
 #notification {
     display: flex;
     justify-content: space-between;

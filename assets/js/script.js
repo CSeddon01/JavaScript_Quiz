@@ -57,6 +57,8 @@
 //  Start Quiz
  startgame = function () { 
     document.getElementById("secondPage").style.display = "none";
+    document.getElementById("thirdPage").style.display = "none";
+    document.getElementById("forthPage").style.display = "none";
      questionCounter = 0;
      score = 0;
      availableQuestions = [...questions];
@@ -81,8 +83,7 @@
 
    if(availableQuestions.length === 0 || questionCounter >= maxQuestions) {
     localStorage.setItem("mostRecentScore", score);
-    window.location.hash = "finalScore";
-    
+    window.location.hash = "finalScore";  
  }
 };
 
@@ -130,6 +131,7 @@ choices.forEach((choice) => {
     var selectedAnswer = selectedChoice.dataset[`number`];
     score = (selectedAnswer == currentQuestion.answer) ? score + 5 : score;
     console.log("stuff" + score);
+    document.getElementById("finalScore").innerHTML = score;
     // scoreText.innerHTML = score;
 
     const classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "wrong";
@@ -147,14 +149,17 @@ choices.forEach((choice) => {
 
 function hideDiv() {
     document.getElementById("firstPage").style.display = "none";
-    console.log("display hidden");
     getNewQuestion();
 }
 
-// Saving Highscores
-// saveHighScore = function (e) {
-    
-// }
+function hideDiv2() {
+    document.getElementById("secondPage").style.display = "none";
+    console.log("display hidden");
+    // getNewQuestion();
+}
+
+
+
 
 // Timer, when it hits zero the game is over
 var timeLeft = 75;
@@ -162,11 +167,41 @@ var downLoadTimer = setInterval(function() {
     if (timeLeft <= 0) {
         clearInterval(downLoadTimer);
         document.getElementById("countdown").innerHTML = "Out of time";
-        window.location.hash = "finalScore";
+        window.location.hash = "theFinalScore";
     } else {
         document.getElementById('countdown').innerHTML = timeLeft + " seconds left";
     }
     timeLeft -= 1; 
 },1000);
+
+//Initials and storing scores/initials in local storage with sorting
+function gameOver() {
+    document.getElementById("initials").addEventListener("click", function () {
+            var highScoreList = JSON.parse(localStorage.getItem("finalScore"));
+            if (highScoreList == null) {
+                var highScoreList = [];
+                var newScore = new Object();
+                newScore.initials = document.getElementById("initials").value;
+                newScore.score = score;
+                highScoreList.push(newScore);
+                var rankedScore = highScoreList.sort(({ score: a }, { score: b }) => b - a);
+                localStorage.setItem("finalScore", JSON.stringify(rankedScore));
+            }
+            else {
+                var highScore = new Object();
+                highScore.initials = document.getElementById("initials").value;
+                highScore.score = score;
+                highScoreList.push(highScore);
+                var rankedScore = highScoreList.sort(({ score: a }, { score: b }) => b - a);
+                localStorage.setItem("finalScore", JSON.stringify(rankedScore));
+            };
+            location.href = "highscores.html"
+        });
+    };
+
+    // Saving Highscores
+// saveHighScore = function (e) {
+    
+// }
 
  startgame();
