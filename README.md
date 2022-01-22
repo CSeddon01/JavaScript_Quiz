@@ -7,7 +7,8 @@ correctly, you will receive 5 points.  The quiz is over when all questions are a
 and see the score at the end. 
 
 ## Screenshots
-![App Screenshot] (https://github.com/CSeddon01/JavaScript_Quiz/blob/main/assets/images/1%20first%20page%20start%20quiz.JPG)
+
+![Screenshot](https://github.com/CSeddon01/JavaScript_Quiz/blob/main/assets/images/1%20first%20page%20start%20quiz.JPG)
 
 ## Website
 
