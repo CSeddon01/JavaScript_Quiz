@@ -41,7 +41,9 @@ h3 {
     width: 100vw;
     height: 25vh;
     display: flex;
+    align-items: center;
     justify-content: center;
+
     align-items: center;
     max-width: 80rem;
     margin: 0 auto;
@@ -93,7 +95,8 @@ h3 {
 }
 
 /* Styles for links (timer and highscores link) at top of page  */
-#notification {
+#notification, p {
+    margin: 0 6rem;
     display: flex;
     justify-content: space-between;
     font-size: 2rem;

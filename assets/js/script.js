@@ -1,14 +1,14 @@
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const scoreText = document.getElementById("finalScore");
-const initials = document.getElementsByID("initials");
+var submitButton = document.getElementById("submit");
 var currentQuestion = {};
 var acceptingAnswers = false;
 var score = 0;
 var questionCounter = 0;
 var availableQuestions = [];
 var form = document.getElementById("form");
-form.onsumbit = gameOver();
+
 //  Array of questions
 var questions = [
   {
@@ -74,8 +74,7 @@ getNewQuestion = function () {
   questionCounter++;
 
   if (questionCounter === availableQuestions.length) {
-    localStorage.setItem("mostRecentScore", score);
-    localStorage.setItem("initials", initials);
+    // localStorage.setItem("mostRecentScore", score);
     document.getElementById("thirdPage").style.display = "inline";
     document.getElementById("secondPage").style.display = "none";
   } else {
@@ -90,6 +89,20 @@ getNewQuestion = function () {
   }
 };
 
+// storing initials
+submitButton.addEventListener("click", () => {
+  if (initials.value.length === "") {
+    alert("Please enter three initials");
+  } else if (initials.value.length < 3 || initials.value.lenght > 3) {
+    alert("Please enter three initials");
+  } else {
+    setHighScore();
+  }
+});
+var setHighScore = function () {
+  localStorage.setItem("mostRecentScore", score);
+  localStorage.setItem("initials", initials.value);
+};
 
 // evalute score
 choices.forEach((choice) => {
@@ -100,17 +113,15 @@ choices.forEach((choice) => {
     var selectedChoice = e.target;
     var selectedAnswer = selectedChoice.dataset[`number`];
     score = selectedAnswer == currentQuestion.answer ? score + 5 : score;
-    if(selectedAnswer == currentQuestion.answer) {
-    document.getElementById("answer").innerHTML = "Correct";
-    
-    } else{
-        document.getElementById("answer").innerHTML = "Wrong!";
-        
+    if (selectedAnswer == currentQuestion.answer) {
+      document.getElementById("answer").innerHTML = "Correct";
+    } else {
+      document.getElementById("answer").innerHTML = "Wrong!";
+      timeLeft = timeLeft - 5;
     }
     console.log("stuff" + score);
     document.getElementById("finalScore").innerHTML = score;
     scoreText.innerHTML = score;
-
 
     const classToApply =
       selectedAnswer == currentQuestion.answer ? "correct" : "wrong";
@@ -119,7 +130,10 @@ choices.forEach((choice) => {
     setTimeout(() => {
       selectedChoice.parentElement.classList.remove(classToApply);
       getNewQuestion();
-    }, 1000);
+    }, 3000);
+    setTimeout(() => {
+      document.getElementById("answer").innerHTML = "";
+    }, 3000);
   });
 });
 
@@ -136,34 +150,9 @@ var downLoadTimer = setInterval(function () {
   timeLeft -= 1;
 }, 1000);
 
-// Initials and storing scores/initials in local storage with sorting
-function gameOver() {
-  // localStorage.setItem("initials", JSON.stringify(initials));
-  console.log("does this work", initials);
-    var mostRecentScore = JSON.parse(localStorage.getItem("mostRecentScore"));
-    var highScoreList = [];
-
-    if (mostRecentScore == null) {
-      var newScore = new Object();
-      newScore.initials = document.getElementById("initials").value;
-      newScore.score = score;
-   
-    } else {
-      var highScore = new Object();
-      highScore.initials = document.getElementById("initials").value;
-      
-     
-    }
-    
-  
-}
-
 function hideDiv() {
-    document.getElementById("firstPage").style.display = "none";
-    getNewQuestion();
+  document.getElementById("firstPage").style.display = "none";
+  getNewQuestion();
 }
-
-
-
 
 startgame();

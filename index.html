@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,88 +8,90 @@
     <title>Coding Quiz Challenge</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
 
     <!-- First Page - Intro Page -->
-<div id="firstPage">
-    <div class="container1">
-        <div id="game" class="justify-center flex-column">
-            <div id="notification">
-            <p class="HighScorePage"><a href="highscore.html">High Score</a></p> 
-            <p class="Timer"></p>
+    <div id="firstPage">
+        <div class="container1">
+            <div id="game" class="justify-center flex-column">
+                <div id="notification">
+                    <p class="HighScorePage"><a href="highscore.html">High Score</a></p>
+                    <p class="Timer"></p>
+                </div>
+            </div>
+        </div>
+        <div class="container2">
+            <div id="home" class="flex-center flex-column">
+                <h1>Coding Quiz Challenge</h1>
+                <h3>Try to answer the following questions within the time limit.</h3>
+
+                <button onclick="hideDiv()" class="btn" href="#game">Quiz Challenge</button>
+
             </div>
         </div>
     </div>
-   <div class="container2">
-    <div id="home" class="flex-center flex-column">
-        <h1>Coding Quiz Challenge</h1>
-        <h3>Try to answer the following questions within the time limit.</h3>
-        
-        <button onclick="hideDiv()" class ="btn" href="#game">Quiz Challenge</button>
 
+    <!-- Second Page - Quiz Page -->
+    <div id="secondPage">
+        <div class="container3">
+            <div class="justify-center flex-column">
+                <div id="notification">
+                    <a href="highscore.html">High scores</a>
+                    <h3 id="score"></h3>
+                    <p id="countdown">Timer</p>
+                </div>
+            </div>
+        </div>
+        <div class="container4">
+            <div id="game" class="justify-center flex-column">
+                <h2 id="question">What is the answer to this question?</h2>
+                <div class="choice-container">
+                    <p class="choice-prefix">1.</p>
+                    <p class="choice-text" data-number="1"></p>
+                </div>
+                <div class="choice-container">
+                    <p class="choice-prefix">2.</p>
+                    <p class="choice-text" data-number="2"></p>
+                </div>
+                <div class="choice-container">
+                    <p class="choice-prefix">3.</p>
+                    <p class="choice-text" data-number="3"></p>
+                </div>
+                <div class="choice-container">
+                    <p class="choice-prefix">4.</p>
+                    <p class="choice-text" data-number="4"></p>
+                </div>
+                <br>
+                <h2 id='answer'></h2>
+            </div>
+        </div>
     </div>
-   </div>   
-</div>
 
-<!-- Second Page - Quiz Page -->
-<div id="secondPage"> 
-  <div class="container3">
-    <div class="justify-center flex-column">
-        <div id="notification">
-            <a href="highscore.html">High scores</a>
-            <h3 id="score"></h3>
-            <p id="countdown">Timer</p>
+    <!-- Third Page - Final Score Page -->
+    <div id="thirdPage">
+        <div class="container5">
+            <div id="game" class="justify-center flex-column">
+                <div id="notification">
+                    <p class="HighScorePage"><a name="highscore">High Scores</a></p>
+                    <p class="Timer"></p>
+                </div>
+            </div>
+        </div>
+        <div class="container6">
+            <div id="finalScoreSection" class="flex-center flex-column">
+                <h2>All done!</h2>
+                <h3>Your final score is:</h3>
+                <h3 id="finalScore"></h3>
+                <form id="form" action="highscore.html">
+                    <input type="text" name="initials" id="initials" placeholder="Enter initials" />
+                    <input id="submit" type="submit" value="Submit" href="highscore.html">
+                </form>
+            </div>
         </div>
     </div>
-  </div>
-  <div class="container4">
-    <div id="game" class="justify-center flex-column">
-        <h2 id="question">What is the answer to this question?</h2>
-        <div class="choice-container">
-            <p class="choice-prefix">1.</p>
-            <p class="choice-text" data-number="1"></p>
-        </div>
-        <div class="choice-container">
-            <p class="choice-prefix">2.</p>
-            <p class="choice-text" data-number="2"></p>
-        </div>
-        <div class="choice-container">
-            <p class="choice-prefix">3.</p>
-            <p class="choice-text" data-number="3"></p>
-        </div>
-        <div class="choice-container">
-            <p class="choice-prefix">4.</p>
-            <p class="choice-text" data-number="4"></p>
-        </div>
-      <br>  
-    <h2 id='answer'></h2>
-    </div>
-  </div>
-</div>
 
-<!-- Third Page - Final Score Page -->
-<div id="thirdPage">
-  <div class="container5">
-    <div id="game" class="justify-center flex-column">
-        <div id="notification">
-            <p class="HighScorePage"><a name="highscore">High Scores</a></p> 
-            <p class="Timer"></p>
-        </div>
-    </div>
-  </div>
-  <div class="container6">
-    <div id="finalScoreSection" class="flex-center flex-column">
-        <h2>All done!</h2>
-        <h3>Your final score is:</h3>
-        <h3 id="finalScore"></h3>
-        <form id="form" action="highscore.html">
-            <input type="text" name="initials" id="initials" placeholder="Enter initials"/>
-            <input type="submit" value="Submit" href="highscore.html">
-        </form>
-    </div>
-  </div>
-</div>
-
-<script type="text/javascript" src="assets/js/script.js"></script>   
+    <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
+
 </html>
