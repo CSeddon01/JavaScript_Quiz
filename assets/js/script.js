@@ -64,7 +64,7 @@ startgame = function () {
   availableQuestions = [...questions];
 };
 
-// New Questions, shuffled
+// New Questions
 getNewQuestion = function () {
   document.getElementById("secondPage").style.display = "inline";
 
@@ -99,8 +99,10 @@ choices.forEach((choice) => {
     score = selectedAnswer == currentQuestion.answer ? score + 5 : score;
     if(selectedAnswer == currentQuestion.answer) {
     document.getElementById("answer").innerHTML = "Correct";
+    
     } else{
         document.getElementById("answer").innerHTML = "Wrong!";
+        
     }
     console.log("stuff" + score);
     document.getElementById("finalScore").innerHTML = score;
