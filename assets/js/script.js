@@ -1,12 +1,14 @@
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const scoreText = document.getElementById("finalScore");
+const initials = document.getElementsByID("initials");
 var currentQuestion = {};
 var acceptingAnswers = false;
 var score = 0;
 var questionCounter = 0;
 var availableQuestions = [];
-
+var form = document.getElementById("form");
+form.onsumbit = gameOver();
 //  Array of questions
 var questions = [
   {
@@ -73,6 +75,7 @@ getNewQuestion = function () {
 
   if (questionCounter === availableQuestions.length) {
     localStorage.setItem("mostRecentScore", score);
+    localStorage.setItem("initials", initials);
     document.getElementById("thirdPage").style.display = "inline";
     document.getElementById("secondPage").style.display = "none";
   } else {
@@ -108,6 +111,7 @@ choices.forEach((choice) => {
     document.getElementById("finalScore").innerHTML = score;
     scoreText.innerHTML = score;
 
+
     const classToApply =
       selectedAnswer == currentQuestion.answer ? "correct" : "wrong";
     selectedChoice.parentElement.classList.add(classToApply);
@@ -125,45 +129,41 @@ var downLoadTimer = setInterval(function () {
   if (timeLeft <= 0) {
     clearInterval(downLoadTimer);
     document.getElementById("countdown").innerHTML = "Out of time";
-    window.location.hash = "finalScore";
+    window.location.href = "highscore.html";
   } else {
     document.getElementById("countdown").innerHTML = timeLeft + " seconds left";
   }
   timeLeft -= 1;
 }, 1000);
 
-//Initials and storing scores/initials in local storage with sorting
+// Initials and storing scores/initials in local storage with sorting
 function gameOver() {
-  document.getElementById("initials").addEventListener("click", function () {
-    var highScoreList = JSON.parse(localStorage.getItem("finalScore"));
-    if (highScoreList == null) {
-      var highScoreList = [];
+  // localStorage.setItem("initials", JSON.stringify(initials));
+  console.log("does this work", initials);
+    var mostRecentScore = JSON.parse(localStorage.getItem("mostRecentScore"));
+    var highScoreList = [];
+
+    if (mostRecentScore == null) {
       var newScore = new Object();
       newScore.initials = document.getElementById("initials").value;
       newScore.score = score;
-      highScoreList.push(newScore);
-      var rankedScore = highScoreList.sort(
-        ({ score: a }, { score: b }) => b - a
-      );
-      localStorage.setItem("finalScore", JSON.stringify(rankedScore));
+   
     } else {
       var highScore = new Object();
       highScore.initials = document.getElementById("initials").value;
-      highScore.score = score;
-      highScoreList.push(highScore);
-      var rankedScore = highScoreList.sort(
-        ({ score: a }, { score: b }) => b - a
-      );
-      localStorage.setItem("finalScore", JSON.stringify(rankedScore));
+      
+     
     }
-    location.href = "highscores.html";
-  });
+    
+  
 }
 
 function hideDiv() {
     document.getElementById("firstPage").style.display = "none";
     getNewQuestion();
 }
+
+
 
 
 startgame();
