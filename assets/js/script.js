@@ -74,7 +74,6 @@ getNewQuestion = function () {
   questionCounter++;
 
   if (questionCounter === availableQuestions.length) {
-    // localStorage.setItem("mostRecentScore", score);
     document.getElementById("thirdPage").style.display = "inline";
     document.getElementById("secondPage").style.display = "none";
   } else {
@@ -89,7 +88,7 @@ getNewQuestion = function () {
   }
 };
 
-// storing initials
+// storing initials, with initial lenght set
 submitButton.addEventListener("click", () => {
   if (initials.value.length === "") {
     alert("Please enter three initials");
@@ -99,12 +98,14 @@ submitButton.addEventListener("click", () => {
     setHighScore();
   }
 });
+
+// Setting up local storage to save score and initials
 var setHighScore = function () {
   localStorage.setItem("mostRecentScore", score);
   localStorage.setItem("initials", initials.value);
 };
 
-// evalute score
+// evalute score, let user know if they are correct/wrong, subtract 5 points for wrong answers
 choices.forEach((choice) => {
   choice.addEventListener("click", (e) => {
     if (!acceptingAnswers) return;
@@ -130,10 +131,10 @@ choices.forEach((choice) => {
     setTimeout(() => {
       selectedChoice.parentElement.classList.remove(classToApply);
       getNewQuestion();
-    }, 3000);
+    }, 1000);
     setTimeout(() => {
       document.getElementById("answer").innerHTML = "";
-    }, 3000);
+    }, 1000);
   });
 });
 
@@ -150,6 +151,7 @@ var downLoadTimer = setInterval(function () {
   timeLeft -= 1;
 }, 1000);
 
+// Hiding divs that aren't being used on the page until needed
 function hideDiv() {
   document.getElementById("firstPage").style.display = "none";
   getNewQuestion();

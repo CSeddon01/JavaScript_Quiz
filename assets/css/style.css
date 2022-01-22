@@ -75,7 +75,7 @@ h3 {
 } 
 
 /* Container styling End */
-
+/* Flex Box Styles */
 .flex-column {
     display: flex;
     flex-direction: column;
@@ -107,6 +107,7 @@ h3 {
     display: none;
 }
 
+/* Button Styling */
 .btn {
     font-size: 1.8rem;
     padding: 1rem 0;
